@@ -18,4 +18,8 @@
     <ProjectReference Include="..\..\Core\ECommerceApi.Application\ECommerceApi.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Concretes\" />
+  </ItemGroup>
+
 </Project>
