@@ -10,6 +10,7 @@ namespace ECommerceApi.Domain.Entities.Common
     {
         public Guid Id { get; set; }
         public DateTime CreatedData { get; set; }
+        public DateTime ModifyData { get; set; }
         public bool Status { get; set; }
     }
 }
