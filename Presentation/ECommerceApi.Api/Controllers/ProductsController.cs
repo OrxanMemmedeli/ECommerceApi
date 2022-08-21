@@ -1,4 +1,5 @@
 ﻿using ECommerceApi.Application.Reposteries.ProductRepositories;
+using ECommerceApi.Application.RequestParameters;
 using ECommerceApi.Application.ViewModels;
 using ECommerceApi.Domain.Entities;
 using Microsoft.AspNetCore.Http;
@@ -22,15 +23,32 @@ namespace ECommerceApi.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery]Pagination pagination)
         {
-            return Ok(await _productReadRepository.GetAll(false).ToListAsync());
+            var count = _productReadRepository.GetAll(false).Count();
+            var products = await _productReadRepository.GetAll(false).Select(x => new
+            {
+                x.Id,
+                x.Name,
+                x.Stock,
+                x.Price,
+                x.CreatedData,
+                x.ModifyData
+            }).Skip(pagination.Page*pagination.Size).Take(pagination.Size)
+                .ToListAsync();
+
+
+            return Ok(new
+            {
+                products,
+                count
+            });
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
-            var products = await _productReadRepository.GetByIdAsync(id,false);
+            var products = await _productReadRepository.GetByIdAsync(id, false);
             return Ok(products);
         }
 
