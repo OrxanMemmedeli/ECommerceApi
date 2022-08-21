@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Filters\NewFolder\**" />
+    <EmbeddedResource Remove="Filters\NewFolder\**" />
+    <None Remove="Filters\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Core\ECommerceApi.Application\ECommerceApi.Application.csproj" />
   </ItemGroup>
 
